@@ -8,16 +8,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create label for the track
         const trackLabel = document.createElement('label');
         trackLabel.textContent = "Track " + trackNumber;
+        trackLabel.style.width = '100%';
         trackDiv.appendChild(trackLabel);
 
-        // Create input for the title
+        // Title input with label
+        const titleLabel = document.createElement('label');
+        titleLabel.textContent = "Title";
         const titleInput = document.createElement('input');
         titleInput.type = 'text';
         titleInput.placeholder = 'Title';
         titleInput.className = 'title-input';
+        trackDiv.appendChild(titleLabel);
         trackDiv.appendChild(titleInput);
 
-        // Create dropdown for "Single"
+        // Single dropdown with label
+        const singleLabel = document.createElement('label');
+        singleLabel.textContent = "Single";
         const singleSelect = document.createElement('select');
         singleSelect.className = 'single-select';
         ['Yes', 'No', 'Maybe'].forEach(option => {
@@ -26,9 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
             opt.textContent = option;
             singleSelect.appendChild(opt);
         });
+        trackDiv.appendChild(singleLabel);
         trackDiv.appendChild(singleSelect);
 
-        // Create dropdown for "Focus Track"
+        // Focus Track dropdown with label
+        const focusLabel = document.createElement('label');
+        focusLabel.textContent = "Focus Track";
         const focusSelect = document.createElement('select');
         focusSelect.className = 'focus-select';
         ['Yes', 'No', 'Maybe'].forEach(option => {
@@ -37,20 +46,27 @@ document.addEventListener('DOMContentLoaded', function() {
             opt.textContent = option;
             focusSelect.appendChild(opt);
         });
+        trackDiv.appendChild(focusLabel);
         trackDiv.appendChild(focusSelect);
 
-        // Create input for "Track Length"
+        // Track Length input with label
+        const lengthLabel = document.createElement('label');
+        lengthLabel.textContent = "Track length";
         const lengthInput = document.createElement('input');
         lengthInput.type = 'text';
         lengthInput.placeholder = 'MM:SS';
         lengthInput.className = 'length-input';
+        trackDiv.appendChild(lengthLabel);
         trackDiv.appendChild(lengthInput);
 
-        // Create input for "ISRC"
+        // ISRC input with label
+        const isrcLabel = document.createElement('label');
+        isrcLabel.textContent = "ISRC";
         const isrcInput = document.createElement('input');
         isrcInput.type = 'text';
         isrcInput.placeholder = 'ISRC';
         isrcInput.className = 'isrc-input';
+        trackDiv.appendChild(isrcLabel);
         trackDiv.appendChild(isrcInput);
 
         // Append the new track row to the container
