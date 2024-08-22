@@ -1,0 +1,11 @@
+/* styles.css */
+.track-row {
+    margin-bottom: 10px;
+}
+.track-row label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+.track-row input, .track-row select {
+    margin-right: 5px;
+}
