@@ -1,8 +1,7 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('add-track-button').addEventListener('click', function() {
-        const trackNumber = document.getElementById('track-list-container').childElementCount + 1;
-
+    // Function to create a new track row
+    function createTrackRow(trackNumber) {
         const trackDiv = document.createElement('div');
         trackDiv.className = 'track-row';
 
@@ -56,5 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Append the new track row to the container
         document.getElementById('track-list-container').appendChild(trackDiv);
+    }
+
+    // Create the first track row by default
+    createTrackRow(1);
+
+    // Add event listener for adding more rows
+    document.getElementById('add-track-button').addEventListener('click', function() {
+        const trackNumber = document.getElementById('track-list-container').childElementCount + 1;
+        createTrackRow(trackNumber);
     });
 });
