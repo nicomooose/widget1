@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         trackDiv.className = 'track-row';
 
         // Create label for the track
-        const trackLabel = document.createElement('label');
+        const trackLabel = document.createElement('h3');
         trackLabel.textContent = "Track " + trackNumber;
         trackLabel.style.width = '100%';
         trackDiv.appendChild(trackLabel);
@@ -14,9 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Title input with label
         const titleLabel = document.createElement('label');
         titleLabel.textContent = "Title";
+        titleLabel.htmlFor = `title-input-${trackNumber}`;
         const titleInput = document.createElement('input');
         titleInput.type = 'text';
         titleInput.placeholder = 'Title';
+        titleInput.id = `title-input-${trackNumber}`;
         titleInput.className = 'title-input';
         trackDiv.appendChild(titleLabel);
         trackDiv.appendChild(titleInput);
@@ -24,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Single dropdown with label
         const singleLabel = document.createElement('label');
         singleLabel.textContent = "Single";
+        singleLabel.htmlFor = `single-select-${trackNumber}`;
         const singleSelect = document.createElement('select');
+        singleSelect.id = `single-select-${trackNumber}`;
         singleSelect.className = 'single-select';
         ['Yes', 'No', 'Maybe'].forEach(option => {
             const opt = document.createElement('option');
@@ -38,7 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Focus Track dropdown with label
         const focusLabel = document.createElement('label');
         focusLabel.textContent = "Focus Track";
+        focusLabel.htmlFor = `focus-select-${trackNumber}`;
         const focusSelect = document.createElement('select');
+        focusSelect.id = `focus-select-${trackNumber}`;
         focusSelect.className = 'focus-select';
         ['Yes', 'No', 'Maybe'].forEach(option => {
             const opt = document.createElement('option');
@@ -52,9 +58,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Track Length input with label
         const lengthLabel = document.createElement('label');
         lengthLabel.textContent = "Track length";
+        lengthLabel.htmlFor = `length-input-${trackNumber}`;
         const lengthInput = document.createElement('input');
         lengthInput.type = 'text';
         lengthInput.placeholder = 'MM:SS';
+        lengthInput.id = `length-input-${trackNumber}`;
         lengthInput.className = 'length-input';
         trackDiv.appendChild(lengthLabel);
         trackDiv.appendChild(lengthInput);
@@ -62,9 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // ISRC input with label
         const isrcLabel = document.createElement('label');
         isrcLabel.textContent = "ISRC";
+        isrcLabel.htmlFor = `isrc-input-${trackNumber}`;
         const isrcInput = document.createElement('input');
         isrcInput.type = 'text';
         isrcInput.placeholder = 'ISRC';
+        isrcInput.id = `isrc-input-${trackNumber}`;
         isrcInput.className = 'isrc-input';
         trackDiv.appendChild(isrcLabel);
         trackDiv.appendChild(isrcInput);
