@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JotForm Widget</title>
+    <style>
+        .track-row {
+            margin-bottom: 10px;
+        }
+        .track-row label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .track-row input, .track-row select {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="track-list-container"></div>
+    <button type="button" id="add-track-button">+ Add Track</button>
+    
+    <script>
+        (function() {
+            let trackCounter = 1;
+
+            JFCustomWidget.subscribe("ready", function(data) {
+                if (data.value) {
+                    const savedData = JSON.parse(data.value);
+                    savedData.forEach((track, index) => {
+                        createTrackRow(index + 1, track);
+                        trackCounter = index + 2;
+                    });
+                } else {
+                    createTrackRow(trackCounter);  
+                }
+            });
+
+            JFCustomWidget.subscribe("submit", function() {
+                const tracks = [];
+                const trackRows = document.querySelectorAll('.track-row');
+                trackRows.forEach(row => {
+                    const track = {
+                        title: row.querySelector('.title-input').value,
+                        single: row.querySelector('.single-select').value,
+                        focusTrack: row.querySelector('.focus-select').value,
+                        length: row.querySelector('.length-input').value,
+                        isrc: row.querySelector('.isrc-input').value
+                    };
+                    tracks.push(track);
+                });
+
+                const result = {
+                    valid: true,
+                    value: JSON.stringify(tracks)
+                };
+                JFCustomWidget.sendSubmit(result);
+            });
+
+            function createTrackRow(trackNumber, trackData = {}) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'track-row';
+
+                const trackLabel = document.createElement('label');
+                trackLabel.textContent = 'Track ' + trackNumber;
+                rowDiv.appendChild(trackLabel);
+
+                const titleInput = document.createElement('input');
+                titleInput.type = 'text';
+                titleInput.placeholder = 'Title';
+                titleInput.className = 'title-input';
+                titleInput.value = trackData.title || '';
+                rowDiv.appendChild(titleInput);
+
+                const singleSelect = document.createElement('select');
+                singleSelect.className = 'single-select';
+                ['Yes', 'No', 'Maybe'].forEach(option => {
+                    const opt = document.createElement('option');
+                    opt.value = option;
+                    opt.textContent = option;
+                    if (trackData.single === option) opt.selected = true;
+                    singleSelect.appendChild(opt);
+                });
+                rowDiv.appendChild(singleSelect);
+
+                const focusSelect = document.createElement('select');
+                focusSelect.className = 'focus-select';
+                ['Yes', 'No', 'Maybe'].forEach(option => {
+                    const opt = document.createElement('option');
+                    opt.value = option;
+                    opt.textContent = option;
+                    if (trackData.focusTrack === option) opt.selected = true;
+                    focusSelect.appendChild(opt);
+                });
+                rowDiv.appendChild(focusSelect);
+
+                const lengthInput = document.createElement('input');
+                lengthInput.type = 'text';
+                lengthInput.placeholder = 'MM:SS';
+                lengthInput.className = 'length-input';
+                lengthInput.value = trackData.length || '';
+                rowDiv.appendChild(lengthInput);
+
+                const isrcInput = document.createElement('input');
+                isrcInput.type = 'text';
+                isrcInput.placeholder = 'ISRC';
+                isrcInput.className = 'isrc-input';
+                isrcInput.value = trackData.isrc || '';
+                rowDiv.appendChild(isrcInput);
+
+                document.getElementById('track-list-container').appendChild(rowDiv);
+            }
+
+            document.getElementById('add-track-button').addEventListener('click', function() {
+                createTrackRow(trackCounter);
+                trackCounter++;
+            });
+
+        })();
+    </script>
+</body>
+</html>
